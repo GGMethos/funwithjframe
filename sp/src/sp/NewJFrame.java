@@ -1,17 +1,25 @@
-//Student Gradebook
 package sp;
+
+import com.opencsv.CSVReader;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.Writer;
+import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Vector;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class NewJFrame extends javax.swing.JFrame {
 
@@ -34,30 +42,18 @@ public class NewJFrame extends javax.swing.JFrame {
         jFileChooser1 = new javax.swing.JFileChooser();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jMenu4 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
 
         jFileChooser1.setDialogTitle("This is my open dialog");
 
@@ -74,39 +70,51 @@ public class NewJFrame extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable1);
 
+        jMenu4.setText("jMenu4");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTable2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {"Annie Bibb", null, null, null, null},
+                {"Denver Callery", null, null, null, null},
+                {"Marquis Cutsfo", null, null, null, null},
+                {"Lovetta Downer", null, null, null, null},
+                {"Alma Gascon", null, null, null, null},
+                {"Moses Graydon", null, null, null, null},
+                {"Alla Hullinger", null, null, null, null},
+                {"Veronika Ledlow", null, null, null, null},
+                {"Kelsey Onorato", null, null, null, null},
+                {"Virginia Reyer", null, null, null, null},
+                {"Sherwood Tokar", null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Student Names", " LAFS.5.RL.1.1", " LAFS.5.RL.1.2", " LAFS.5.RL.1.3", " LAFS.5.RL.2.4"
             }
         ));
+        jTable2.setToolTipText("");
         jTable2.setGridColor(new java.awt.Color(204, 204, 204));
         jScrollPane3.setViewportView(jTable2);
-
-        jLabel1.setText("Student");
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Date");
-
-        jLabel3.setText("Score");
-
-        jButton1.setText("Add");
-
-        jButton2.setText("Update");
-
-        jButton3.setText("Remove");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -114,27 +122,7 @@ public class NewJFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton3))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTextField1)
-                                    .addComponent(jComboBox1, 0, 105, Short.MAX_VALUE))
-                                .addGap(148, 148, 148)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -145,28 +133,8 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2)
-                    .addComponent(jLabel2))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 22, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -190,6 +158,11 @@ public class NewJFrame extends javax.swing.JFrame {
         jMenu1.add(jMenuItem5);
 
         jMenuItem6.setText("Save Gradesheet");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem6);
 
         jMenuItem7.setText("New Gradesheet");
@@ -202,35 +175,17 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu5.setText("Help");
 
-        jMenu3.setText("Class Menu");
-
-        jMenuItem1.setText("Add Class");
+        jMenuItem1.setText("Benchmarks");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem1);
+        jMenu5.add(jMenuItem1);
 
-        jMenuItem2.setText("Add Student");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem2);
-
-        jMenuItem3.setText("Remove Class");
-        jMenu3.add(jMenuItem3);
-
-        jMenuItem4.setText("Remove Student");
-        jMenu3.add(jMenuItem4);
-
-        jMenu2.add(jMenu3);
-
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
 
@@ -248,50 +203,78 @@ public class NewJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-    jTable2 model = (DefaultTableModel) jTable2.getModel();
-    model.addRow(new Object[]{"Column 1", "Column 2", "Column 3"});
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-    
-    private void jMenuItem1ActionPerformed3(java.awt.event.ActionEvent evt) {                                           
-    jTable2 model = (DefaultTableModel) jTable2.getModel();
-    model.delRow(new Object[]{"Column 1", "Column 2", "Column 3"});
-    }         
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        jTable2.repaint();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
     private void jMenuItem5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem5MouseClicked
-int returnVal = jFileChooser1.showOpenDialog(this);
+        int returnVal = jFileChooser1.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = jFileChooser1.getSelectedFile();
-try
-{
-//File f = FileChooser2.getSelectedFile();
-FileInputStream fStream = new FileInputStream(file);
-ObjectInput stream = new ObjectInputStream(fStream);
-Object obj = stream.readObject();
-//FIX THIS!
-//if(obj instanceof TableModel)
-//{
-//Table1.setModel((TableModel) obj);
-//}
-
-stream.close();
-fStream.close();
-}
-
-catch (Exception e)
-{
-jTextField1.setText("A table loading error has occurred");
-}
+           // try {
+                // What to do with the file, e.g. display it in a TextArea
+                
+           // } catch (IOException ex) {
+             //   System.out.println("problem accessing file" + file.getAbsolutePath());
+           // }
         } else {
             System.out.println("File access cancelled by user.");
         }
     }//GEN-LAST:event_jMenuItem5MouseClicked
-public void jMenuItem6ActionPerformed (java.awt.event.MouseEvent evt)
-{
-    int returnVal = jFileChooser1.showOpenDialog(this);
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        /*try {
+            FileWriter dir = new FileWriter("test.txt");
+        } catch (IOException ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+        
+        
+        
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+   
+        int returnVal = jFileChooser1.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = jFileChooser1.getSelectedFile();
+           try {
+                CSVReader reader = new CSVReader(new FileReader(file));
+                //List myEntries = reader.readAll();
+               // JTable table = new JTable(myEntries.toArray());
+                String[][] rowData = {
+    { "A", "B", "C", "D" },
+    { "E", "F", "G", "H" }
+};
+
+List<String[]> myEntries = reader.readAll();
+rowData = myEntries.toArray(new String[0][]);
+
+String[] columnNames = { "Student Names", "LAFS.S.RL.1.1", "LAFS.5.RL.1.2", "LAFS.5.RL.1.3", "LAFS.5.RL.2.4" };
+
+System.out.println(myEntries);
+
+JTable table1 = new JTable(rowData, columnNames);
+
+jTable2.setModel(table1.getModel());
+                
+           } catch (Exception ex) {
+             //   System.out.println("problem accessing file" + file.getAbsolutePath());
+           }
+        } else {
+            System.out.println("File access cancelled by user.");
+        }
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        
+      //JFrame frame = new JFrame ("MyPanel");
+            /*frame.setDefaultCloseOperation (JFrame.DISPOSE_ON_CLOSE);
+            frame.setSize(400,800);
+            frame.setVisible (true);*/
+      Scales scale = new Scales();
+      scale.setVisible(true);
+            
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+            /*int returnVal = jFileChooser1.showOpenDialog(this);
     if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = jFileChooser1.getSelectedFile();
 
@@ -307,44 +290,19 @@ fStream.close();
 
 catch (IOException e)
 {
-jTextField1.setText("A table saving error has occurred");
-}
+//jTextField1.setText("A table saving error has occurred");
+}*/
+        try{writeCSVfile(jTable2);}
+        catch(Exception ex){ }
 
-}
-}
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        try {
-            FileWriter dir = new FileWriter("test.txt");
-        } catch (IOException ex) {
-            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-   
-        int returnVal = jFileChooser1.showOpenDialog(this);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = jFileChooser1.getSelectedFile();
-           // try {
-                // What to do with the file;
-                
-           // } catch (IOException ex) {
-             //   System.out.println("problem accessing file" + file.getAbsolutePath());
-           // }
-        } else {
-            System.out.println("File access cancelled by user.");
-        }
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -374,24 +332,43 @@ jTextField1.setText("A table saving error has occurred");
             }
         });
     }
+public void writeCSVfile(JTable table) throws IOException, ClassNotFoundException, SQLException{
+        Writer writer = null;
+        DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+        int nRow = dtm.getRowCount();
+        int nCol = dtm.getColumnCount();
+        try {
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("file.txt"), "utf-8"));
+
+            //write the header information
+            StringBuffer bufferHeader = new StringBuffer();
+            for (int j = 0; j < nCol; j++) {
+                bufferHeader.append(dtm.getColumnName(j));
+                if (j!=nCol) bufferHeader.append(", ");
+            }
+            writer.write(bufferHeader.toString() + "\r\n");
+
+           //write row information
+            for (int i = 0 ; i < nRow ; i++){
+                 StringBuffer buffer = new StringBuffer();
+                for (int j = 0 ; j < nCol ; j++){
+                    buffer.append(dtm.getValueAt(i,j));
+                    if (j!=nCol) buffer.append(", ");
+                }
+                writer.write(buffer.toString() + "\r\n");
+            }
+        } finally {
+              writer.close();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JFileChooser jFileChooser1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
@@ -401,7 +378,93 @@ jTextField1.setText("A table saving error has occurred");
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
+
+     private void Csv2TableModel(File file) {
+        try {
+            // Read a csv file called 'data.txt' and save it to a more
+            // correctly named 'data.csv'
+            String datafile = "data.txt";
+            FileReader fin = new FileReader(datafile);
+            DefaultTableModel m = createTableModel(fin, null);
+            JFrame f = new JFrame();
+            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            f.getContentPane().add(new JScrollPane(new JTable(m)));
+            f.setSize(200, 300);
+            f.setVisible(true);
+
+            FileWriter out = new FileWriter("data.csv");
+            defaultTableModelToStream(m, out);
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *
+     * @param dtm The DefaultTableModel to save to stream
+     * @param out The stream to which to save
+     *
+     */
+    public static void defaultTableModelToStream(DefaultTableModel dtm,
+        Writer out) throws IOException {
+        final String LINE_SEP = System.getProperty("line.separator");
+        int numCols = dtm.getColumnCount();
+        int numRows = dtm.getRowCount();
+
+        // Write headers
+        String sep = "";
+
+        for (int i = 0; i < numCols; i++) {
+            out.write(sep);
+            out.write(dtm.getColumnName(i));
+            sep = ",";
+        }
+
+        out.write(LINE_SEP);
+
+        for (int r = 0; r < numRows; r++) {
+            sep = "";
+
+            for (int c = 0; c < numCols; c++) {
+                out.write(sep);
+                out.write(dtm.getValueAt(r, c).toString());
+                sep = ",";
+            }
+
+            out.write(LINE_SEP);
+        }
+    }
+
+
+    public static DefaultTableModel createTableModel(Reader in,
+        Vector<Object> headers) {
+        DefaultTableModel model = null;
+        Scanner s = null;
+
+        try {
+            Vector<Vector<Object>> rows = new Vector<Vector<Object>>();
+            s = new Scanner(in);
+
+            while (s.hasNextLine()) {
+                rows.add(new Vector<Object>(Arrays.asList(s.nextLine()
+                                                           .split("\\s*,\\s*",
+                                -1))));
+            }
+
+            if (headers == null) {
+                headers = rows.remove(0);
+                model = new DefaultTableModel(rows, headers);
+            } else {
+                model = new DefaultTableModel(rows, headers);
+            }
+
+            return model;
+        } finally {
+            s.close();
+        }
+    }
 }
+
+

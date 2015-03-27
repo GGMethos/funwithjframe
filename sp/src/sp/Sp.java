@@ -1,22 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sp;
 
 import javax.swing.JFrame;
+import javax.swing.UIManager;
 
-/**
- *
- * @author Acbn
- */
 public class Sp extends JFrame{
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        try{ UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");}
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
        NewJFrame sp = new NewJFrame();
        sp.setVisible(true);
     }
